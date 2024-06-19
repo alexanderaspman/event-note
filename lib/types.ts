@@ -8,6 +8,7 @@ export  type ClockworkNotes = {
     images?:string
 }
 export type ClockworkCategorisedNotes = {
+    [x: string]: any
     id: string
     createAt: string
     updatedAt: string

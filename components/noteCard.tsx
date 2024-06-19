@@ -1,4 +1,3 @@
-import { fetchUpdateFunctionHandler } from "@/handlers/fetchFunctionHandler"
 import { ClockworkNotes ,ClockworkCategorisedNotes} from "@/lib/types"
 import Image from "next/image"
 
@@ -15,7 +14,7 @@ export default async function NoteCard({note}:NoteProps) {
 //console.log("update",update)
   return (
     <section className="h-[380px w-[500]]">
-      <Image src={note.image} alt={"idea"}  width={50} height={50}/>
+      <Image src={note.image} alt={note.name}  width={50} height={50}/>
       <h2>{note.name}</h2>
     <div>
         

@@ -1,6 +1,6 @@
 import H1 from "@/components/h1"
 import NoteList from "@/components/noteList"
-import {fetchFunctionHandler} from '@/handlers/fetchFunctionHandler'
+import {fetchFunctionHandler} from '@/handlers/api'
 import {ClockworkNotes} from '@/lib/types'
 
 type NotesPageProps={

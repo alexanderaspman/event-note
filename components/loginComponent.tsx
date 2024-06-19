@@ -5,6 +5,8 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import Image from "next/image"
 import Link from 'next/link';
 import NotesPage from '@/app/notes/[category]/page';
+import { GetServerSideProps, NextApiRequest, NextApiResponse } from 'next';
+import { handleLoginUser } from '@/handlers/api';
 
 interface User {
     password:string
@@ -13,71 +15,49 @@ interface User {
     title?: string;
     body?: string;
   }
+  interface Token {token:string}
+  type T = {
+    
+   data:   Token[]|null}
   const imageLoader = ({ src}:any) => {
     https://media.crystallize.com/alexanderaspmannu/24/4/9/2/designer-8.png
     return `https://app.crystallize.com/@alexanderaspmannu/en/assets/photo/alexanderaspmannu${src}`
   }
-const LoginComponent = ({imageLink}:any ) => {
+  
+function LoginComponent<getServerSideProps>  ({imageLink}:any )  {
   const [itemTokenFromLocalStorage,setItemTokenFromLocalStorage] = useState()
 
   const [token, setToken] = useState<null|string>(itemTokenFromLocalStorage||null)
 
-  const [loggedPath,setLoggedPath] = useState('')
+  const [loggedPath,setLoggedPath] = useState()
 
-const usernameInputRef = useRef<HTMLInputElement |null|any>()
+const usernameInputRef = useRef<any>()
 const passwordInputRef = useRef<HTMLInputElement |null|any>()
-  
-  const handleLoginUser = async () => {
+  const handleLogin =()=>{
 
-    const enteredUsername:string = usernameInputRef.current.value;
-    const enteredPasword:string = passwordInputRef.current.value;
+
+    const enteredUsername = usernameInputRef.current.value||'';
+    const enteredPasword:string = passwordInputRef.current.value||'';
 console.log(enteredUsername)
 console.log(enteredPasword)
     
 
-  const newLogin: User = {
-    name: enteredUsername,
-    password: enteredPasword,
+
+    
+  handleLoginUser(enteredUsername,enteredPasword)
    
-     
-  }
-  const documentUrl = `http://localhost:3003/signin`
-  const headers = {
-   //"Authorization":("Bearer " + token),
-    'Content-Type': 'application/json'
-
-  };
-
-  const options = {
-
-    method: 'POST',
-    headers,
-   
-  body: JSON.stringify(newLogin)
-  };
-  const res =   await fetch( `${documentUrl}`, options)
-  const data = await res.json()
-
-  setToken(data.token)
-  if(await token!==null){
-    setLoggedPath("/")
 }
-else{setLoggedPath("/login")}
-
- 
-
-};
-
-
 useEffect(()=>{
+  if(token !== null){
   localStorage.setItem("token",JSON.stringify(token))
   setItemTokenFromLocalStorage(JSON.parse(localStorage.getItem('token')))
+  
+}
 
-
-},[token])
+},[token])     
     return(
       
-         
+    
 <main>{token !== null && <NotesPage params={{
         category: ''
       }}/>}{token === null &&
@@ -94,7 +74,6 @@ useEffect(()=>{
    
         <div className={styles.login}>
      
-        <form className={styles.login__form} onSubmit={handleLoginUser}>
            <h1 className={styles.login__title}>Login</h1>
 
            <div className={styles.login__inputs}>
@@ -118,13 +97,12 @@ useEffect(()=>{
               <a href="#" className={styles.login__forgot}>Forgot Password?</a>
            </div>
 
-<Link href={`${loggedPath}`}>
-           <button  className={styles.login__button} onClick={handleLoginUser}>Login</button>
+<Link href={`${''}`}>
+           <button  className={styles.login__button} onClick={handleLogin}>Login</button>
            </Link>
            <div className={styles.login__register} >
               Don't have an account? <a href="#">Register</a>
            </div>
-           </form>
      </div>
     
      </div>}

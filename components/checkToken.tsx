@@ -8,4 +8,5 @@ export default async function CheckToken() {
         setItemTokenFromLocalStorage( JSON.parse(localStorage.getItem('token')))
     },[itemTokenFromLocalStorage])
   return itemTokenFromLocalStorage
+
 }
