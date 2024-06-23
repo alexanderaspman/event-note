@@ -5,20 +5,20 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const LoginPage = () => {
-  const [username, setUsername] = useState('');
+const CreateUserPage = () => {
+  const [name, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch('/api/login', {
+    const response = await fetch('/api/create-user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name:username, password }),
+      body: JSON.stringify({ name, password }),
     });
 
     if (response.ok) {
@@ -38,7 +38,7 @@ const LoginPage = () => {
             <input
 style={{color:'black'}}             
  type="text"
-              value={username}
+              value={name}
               onChange={(e) => setUsername(e.target.value)}
             />
           </label>
@@ -54,13 +54,13 @@ style={{color:'black'}}
             />
           </label>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Create user</button>
       </form>
     </div>
   );
 };
 
-export default LoginPage;
+export default CreateUserPage;
 /*
 
 import CheckViewport from "@/components/checkViewPort"

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  const response = await fetch('http://localhost:3003/signin', {
+  const response = await fetch('http://localhost:3003/user', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

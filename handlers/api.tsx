@@ -1,13 +1,6 @@
 import {ClockworkNotes,ClockworkCategorisedNotes} from '@/lib/types'
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA0ZGYxNmNjLTkyYTUtNGNjNC04NzMyLWJmN2U5YTdjMGEwZSIsIm5hbWUiOiJrb250YWt0QGFsZXhhbmRlcmFzcG1hbi5zZSIsImVtYWlsIjpudWxsLCJpYXQiOjE3MTg4MDU0Nzh9.-Xshg2PAr7qnroy3w68gb0KeioEIdVaxEbkzWjQA_bE"
+import { cookies } from 'next/headers';
 
-interface User {
-  password:string
-  email?: string;
-  name?: string;
-  title?: string;
-  body?: string;
-}
 
 interface Data{
   data:ClockworkNotes[]
@@ -22,7 +15,9 @@ interface Data{
   }
 
 export  async function  fetchFunctionHandler<getServerSideProps>(){
- 
+  const allCookies = cookies();
+  const token = allCookies.get('token');
+
   const headers = {
       "Authorization":("Bearer " + await token),
        'Content-Type': 'application/json'
@@ -51,6 +46,9 @@ export  async function  fetchFunctionHandler<getServerSideProps>(){
   
  
   export  async function signUpNewUser(email:any,password:any) {
+    const allCookies = cookies();
+    const token = allCookies.get('token');
+  
     const newUser:User={
       name:email,
       password:password

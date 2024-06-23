@@ -7,7 +7,7 @@ export default function NoteList<getStaticProps>({notes}:any|any[]) {
   const imagework = `https://res.cloudinary.com/doxjwirzp/image/upload/tgvong3adan9k0lkgpbw.jpg`;
   
   
-  const updatedNotes:ClockworkNotes = notes.map((note:ClockworkNotes) => {
+  const updatedNotes:ClockworkNotes = notes !== null ? []: notes.map((note:ClockworkNotes) => {
     if (note.name === "ideas") {
       return {...note ,image: imageIdea };
     }
@@ -19,7 +19,7 @@ export default function NoteList<getStaticProps>({notes}:any|any[]) {
       return{...note,image:imagework}
     }
     return note;
-  });
+  })  ;
     
   return  (
     <div>

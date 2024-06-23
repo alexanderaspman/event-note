@@ -17,7 +17,7 @@ const NotesPage = async ({params}:NotesPageProps) =>{
 
     
     
- const {data,update}:Props = (await(await res).props)
+ const {data,update}:Props = (await(await res).props)||[]
 console.log("data",data)
 
 const category = params.category

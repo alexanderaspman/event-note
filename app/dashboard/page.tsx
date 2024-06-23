@@ -1,23 +1,14 @@
-'use client';
-
-import { useEffect } from 'react';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 const DashboardPage = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const token = Cookies.get('authToken');
-    if (!token) {
-      router.push('/login');
-    }
-  }, []);
+  // Access the cookies
+  const allCookies = cookies();
+  const token = allCookies.get('token');
 
   return (
     <div>
       <h1>Dashboard</h1>
-      <p>Welcome to the dashboard!</p>
+      <p>Token: {token ? token.value : 'No token found'}</p>
     </div>
   );
 };
