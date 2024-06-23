@@ -1,39 +1,54 @@
-import CheckViewport from "@/components/checkViewPort"
-import LoginComponent from "@/components/loginComponent"
-import Image from "next/image"
-import Home from "../page"
-import { useActionState } from "react";
-import { signUpNewUser } from "@/handlers/api";
+'use client';
 
-const imageLoader = ({ src}:any) => {
-    return `https://app.crystallize.com/@alexanderaspmannu/en/assets/photo/alexanderaspmannu/24/3/14/1/${src}`
-  }
-   
+import { useState } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
-export default function LoginPage() {
-  async function signup(prevState:any, formData:any) {
-    "use server";
-    const email = formData.get("email");
+const LoginPage = () => {
+  const [email, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
-      await signUpNewUser(email,email);
-      alert(`Added "${email}"`);
-    } catch (error:any) {
-      return error.toString();
+      const response = await axios.post('http://localhost:3003/signin', {
+        email,
+        password,
+      });
+      const { token } = response.data;
+      Cookies.set('authToken', token, { expires: 1 }); // Expires in 1 day
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('Login failed:', error);
     }
-  }
-  const [message, signupAction] = useActionState(signup, null);
-  return (
-    <>
-      <h1>Signup for my newsletter</h1>
-      <p>Signup with the same email twice to see an error</p>
-      <form action={signupAction} id="signup-form">
-        <label htmlFor="email">Email: </label>
-        <input name="email" id="email" placeholder="react@example.com" />
-        <button>Sign up</button>
-        {!!message && <p>{message}</p>}
-      </form>
-    </>
-  );
-}
+  };
 
-  
+  return (
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Username:</label>
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+};
+
+export default LoginPage;
