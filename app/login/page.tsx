@@ -2,33 +2,63 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import CheckViewport from '@/components/checkViewPort';
+import LoginComponent from '@/components/loginComponent';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const router = useRouter();
+    const [width, setWidth] = useState<number|any>()
+        
+    const mobile = 700;
+    const tablet = 980;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name:username, password }),
-    });
-
-    if (response.ok) {
-      router.push('/dashboard');
-    } else {
-      alert('Login failed');
+    const handleResizeWindow = async(width:any)=>{
+     
+      
+        console.log("window.innerWidth", window.innerWidth);
+    //set vidth to the screen size of the window
+ 
+  const handleResizeWindow = async() => setWidth(window.innerWidth);         
+       window.addEventListener("resize", handleResizeWindow);
+  }
+    useEffect(() => {  
+         setWidth ( window.innerWidth)
+        
+     
+       
     }
-  };
+, []);
+  return (<main>
+    {width < 800&&
+        (
+         <div>
+         
+           <LoginComponent  imageLink={"/24/4/9/3/designer-9.png"} />
+         
+         </div>
+       ) 
+        }
+     
+     
+   
+        { 
+       width > 800 && (
+       <div>
+      
+         <LoginComponent  imageLink={"/24/4/9/2/designer-8.png"} />
+ 
+      
+       </div>)}
+      
+        </main>
+     )
+    
 
-  return (
+   
+  
+};
+ {/*
     <div>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
@@ -56,10 +86,7 @@ style={{color:'black'}}
         </div>
         <button type="submit">Login</button>
       </form>
-    </div>
-  );
-};
-
+    </div>*/}
 export default LoginPage;
 /*
 

@@ -4,60 +4,54 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import CreateUserComponent from '@/components/createUserComponent';
+const CreateUserPage = ({imageLink}:any) => {
+    const [width, setWidth] = useState<number|any>()
+        
+    const mobile = 700;
+    const tablet = 980;
 
-const CreateUserPage = () => {
-  const [name, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const response = await fetch('/api/create-user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, password }),
-    });
-
-    if (response.ok) {
-      router.push('/dashboard');
-    } else {
-      alert('Login failed');
+    const handleResizeWindow = async(width:any)=>{
+     
+      
+        console.log("window.innerWidth", window.innerWidth);
+    //set vidth to the screen size of the window
+ 
+  const handleResizeWindow = async() => setWidth(window.innerWidth);         
+       window.addEventListener("resize", handleResizeWindow);
+  }
+    useEffect(() => {  
+         setWidth ( window.innerWidth)
+        
+     
+       
     }
-  };
-
-  return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Username:
-            <input
-style={{color:'black'}}             
- type="text"
-              value={name}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password:
-            <input
-            style={{color:'black'}}      
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-        </div>
-        <button type="submit">Create user</button>
-      </form>
-    </div>
-  );
+, []);
+  return (<main>
+    {width < 800&&
+        (
+         <div>
+         
+           <CreateUserComponent  imageLink={"/24/4/9/3/designer-9.png"} />
+         
+         </div>
+       ) 
+        }
+     
+     
+   
+        { 
+       width > 800 && (
+       <div>
+      
+         <CreateUserComponent  imageLink={"/24/4/9/2/designer-8.png"} />
+ 
+      
+       </div>)}
+      
+        </main>
+     )
 };
 
 export default CreateUserPage;
@@ -89,4 +83,4 @@ const Login = ( imageLink: any) => {
 
 
 export default Login
-*/
+*/  

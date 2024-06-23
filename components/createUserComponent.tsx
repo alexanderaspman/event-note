@@ -22,7 +22,7 @@ interface User {
     return `https://app.crystallize.com/@alexanderaspmannu/en/assets/photo/alexanderaspmannu${src}`
   }
   
-function LoginComponent<getServerSideProps>  ({imageLink}:any )  {
+function CreateUserComponent<getServerSideProps>  ({imageLink}:any )  {
  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +31,7 @@ function LoginComponent<getServerSideProps>  ({imageLink}:any )  {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch('/api/login', {
+    const response = await fetch('/api/create-user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -115,13 +115,15 @@ style={{color:'black'}}
                  <label  className={styles.login__check_label}>Remember me</label>
               </div>
 
-              <a href="#" className={styles.login__forgot}>Forgot Password?</a>
+             
            </div>
 
-<button  className={styles.login__button} type="submit">Login</button>
+<Link href={`${''}`}>
+<button className={styles.login__button} type="submit">Create user</button>
 
+           </Link>
            <div className={styles.login__register} >
-           <p> Don't have an account?<Link href={'/create-user'}> <a href="/create-user">Register</a></Link></p>  
+           <p> Already have an acount? <Link href={'/login'}>Signin</Link></p>  
            </div>
            </form>
      </div>
@@ -132,4 +134,4 @@ style={{color:'black'}}
      </main>
     )
 }
-export default LoginComponent
+export default CreateUserComponent
