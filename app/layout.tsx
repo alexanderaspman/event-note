@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import Container from '@/components/container'
+import { AuthProvider } from '@/context/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,11 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-950 text-white overflow-y-scroll`}>
+        <AuthProvider>
         <Container>
         <Header/>
         {children}
         <Footer />
         </Container>
+        </AuthProvider>
         </body>
     </html>
   )

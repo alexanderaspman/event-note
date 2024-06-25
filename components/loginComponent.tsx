@@ -22,7 +22,7 @@ interface User {
     return `https://app.crystallize.com/@alexanderaspmannu/en/assets/photo/alexanderaspmannu${src}`
   }
   
-function LoginComponent<getServerSideProps>  ({imageLink}:any )  {
+function LoginComponent ({imageLink}:any )  {
  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -40,7 +40,7 @@ function LoginComponent<getServerSideProps>  ({imageLink}:any )  {
     });
 
     if (response.ok) {
-      router.push('/dashboard');
+      router.push('/');
     } else {
       alert('Login failed');
     }
@@ -121,7 +121,7 @@ style={{color:'black'}}
 <button  className={styles.login__button} type="submit">Login</button>
 
            <div className={styles.login__register} >
-           <p> Don't have an account?<Link href={'/create-user'}> <a href="/create-user">Register</a></Link></p>  
+           <p> Dont have an account?<Link href={'/create-user'}> <a href="/create-user">Register</a></Link></p>  
            </div>
            </form>
      </div>

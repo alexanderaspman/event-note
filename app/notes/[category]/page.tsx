@@ -17,7 +17,7 @@ const NotesPage = async ({params}:NotesPageProps) =>{
     const token = allCookies.get('token');
   
     const headers = {
-        "Authorization":("Bearer " + token.value ),
+        "Authorization":("Bearer " + token?.value ),
          'Content-Type': 'application/json'
      
        };
