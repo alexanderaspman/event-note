@@ -11,10 +11,10 @@ export default async function NoteCard({note}:NoteProps) {
 //const update:ClockworkCategorisedNotes[] = await (await categoryNote)
 
 //console.log("categoryNote",categoryNote)
-//console.log("update",update)
+//console.log("update",update)  <Image src={note.image} alt={note.name}  width={50} height={50}/>
   return (
     <section className="h-[380px w-[500]]">
-      <Image src={note.image} alt={note.name}  width={50} height={50}/>
+     
       <h2>{note.name}</h2>
     <div>
         

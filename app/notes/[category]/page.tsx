@@ -2,6 +2,7 @@ import H1 from "@/components/h1"
 import NoteList from "@/components/noteList"
 import { fetchFunctionHandler} from '@/handlers/api'
 import {ClockworkCategorisedNotes, ClockworkNotes} from '@/lib/types'
+import { cookies } from "next/headers"
 
 type NotesPageProps={
     params:{category:string}
@@ -12,13 +13,24 @@ type Props = {
 }
 
 const NotesPage = async ({params}:NotesPageProps) =>{
-
-    const res=fetchFunctionHandler() 
-
+    const allCookies = cookies();
+    const token = allCookies.get('token');
+  
+    const headers = {
+        "Authorization":("Bearer " + token.value ),
+         'Content-Type': 'application/json'
+     
+       };
+     
+       const options = {
     
+        method: 'GET',
+        headers,
+       }
+      
+    const response = await fetch("http://localhost:3003/api/product", options)
+    const data:any = await response.json()
     
- const {data,update}:Props = (await(await res).props)||[]
-console.log("data",data)
 
 const category = params.category
 
@@ -27,7 +39,7 @@ const category = params.category
         {category === "all" && "All notes"}
         {category !== "all" && `Notes in category ${category.charAt(0).toUpperCase()+ category.slice(1)}`}
         </H1>
-      {<NoteList notes={data} />
+      {<NoteList notes={data.data} />
       }
         </main>)
 }

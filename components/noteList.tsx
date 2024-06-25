@@ -1,13 +1,18 @@
 import {ClockworkNotes,ClockworkCategorisedNotes} from '@/lib/types'
 import NoteCard from './noteCard'
 
-export default function NoteList<getStaticProps>({notes}:any|any[]) {
+
+type NoteProps ={
+  notes:ClockworkNotes[]
+    //updates:ClockworkCategorisedNotes[]
+}
+export default function NoteList({notes}:NoteProps) {
   const imageIdea = `https://res.cloudinary.com/doxjwirzp/image/upload/v1718624333/wqmkjccie112znht5upn.jpg`;
   const imageFunny = `https://res.cloudinary.com/doxjwirzp/image/upload/jq5xhj4rzraoqukyqahb.jpg`;
   const imagework = `https://res.cloudinary.com/doxjwirzp/image/upload/tgvong3adan9k0lkgpbw.jpg`;
   
   
-  const updatedNotes:ClockworkNotes = notes !== null ? []: notes.map((note:ClockworkNotes) => {
+   /*const updatedNotes:ClockworkNotes = notes !== null ? []: notes.map((note:ClockworkNotes) => {
     if (note.name === "ideas") {
       return {...note ,image: imageIdea };
     }
@@ -19,17 +24,17 @@ export default function NoteList<getStaticProps>({notes}:any|any[]) {
       return{...note,image:imagework}
     }
     return note;
-  })  ;
+  })  ;**/
     
   return  (
     <div>
-   { updatedNotes.map((note:ClockworkNotes)=>{
+   { notes.map((note:ClockworkNotes)=>(
 
 
   
   
-    return  <NoteCard key={note.id} note={note} />
-   })}</div>
+      <NoteCard key={note.id} note={note} />
+   ))}</div>
    )
   
 }
