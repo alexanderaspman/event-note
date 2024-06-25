@@ -40,7 +40,7 @@ function CreateUserComponent<getServerSideProps>  ({imageLink}:any )  {
     });
 
     if (response.ok) {
-      router.push('/dashboard');
+      router.push('/');
     } else {
       alert('Login failed');
     }
@@ -90,7 +90,7 @@ style={{color:'black'}}
    
         <div className={styles.login}>
      
-           <h1 className={styles.login__title}>Login</h1>
+           <h1 className={styles.login__title}>Create user</h1>
            <form onSubmit={handleSubmit}  className={styles.login__form}>
 
            <div className={styles.login__inputs}>
