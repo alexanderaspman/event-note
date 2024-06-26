@@ -58,35 +58,7 @@ function LoginComponent ({imageLink}:any )  {
       className="min-h-screen min-w-screen "
       style={{position:'absolute'}}
       />       
-            {/*
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Username:
-            <input
-style={{color:'black'}}             
- type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password:
-            <input
-            style={{color:'black'}}      
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>*/}
+         
    
         <div className={styles.login}>
      
