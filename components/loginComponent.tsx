@@ -87,13 +87,13 @@ function LoginComponent ({imageLink}:any )  {
                  <label  className={styles.login__check_label}>Remember me</label>
               </div>
 
-              <a href="#" className={styles.login__forgot}>Forgot Password?</a>
+              <p className={styles.login__forgot}>{`Forgot Password?`}</p>
            </div>
 
 <button  className={styles.login__button} type="submit">Login</button>
 
            <div className={styles.login__register} >
-           <p> Dont have an account?<Link href={'/create-user'}> <a href="/create-user">Register</a></Link></p>  
+           <p>{` Dont have an account?`}<Link href={'/create-user'}> Register</Link></p>  
            </div>
            </form>
      </div>

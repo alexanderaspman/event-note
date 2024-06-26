@@ -58,39 +58,11 @@ function CreateUserComponent<getServerSideProps>  ({imageLink}:any )  {
       className="min-h-screen min-w-screen "
       style={{position:'absolute'}}
       />       
-            {/*
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Username:
-            <input
-style={{color:'black'}}             
- type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password:
-            <input
-            style={{color:'black'}}      
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>*/}
+      
    
         <div className={styles.login}>
      
-           <h1 className={styles.login__title}>Login</h1>
+           <h1 className={styles.login__title}>Create a account</h1>
            <form onSubmit={handleSubmit}  className={styles.login__form}>
 
            <div className={styles.login__inputs}>
@@ -123,7 +95,7 @@ style={{color:'black'}}
 
            </Link>
            <div className={styles.login__register} >
-           <p> Already have an acount? <Link href={'/login'}>Signin</Link></p>  
+           <p>{` Already have an acount?`} <Link href={'/login'}>Signin</Link></p>  
            </div>
            </form>
      </div>
