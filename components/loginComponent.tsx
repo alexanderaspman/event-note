@@ -36,7 +36,7 @@ function LoginComponent ({imageLink}:any )  {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name:username, password }),
+      body: JSON.stringify({ email:username, password }),
     });
 
     if (response.ok) {

@@ -29,7 +29,7 @@ const NotesPage = async ({params}:NotesPageProps) =>{
        }
       
     const response = await fetch("http://localhost:3003/api/product", options)
-    const data:any = await response.json()
+    const data:any|any[] = await response.json()||[]
     
 
 const category = params.category

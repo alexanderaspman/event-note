@@ -34,7 +34,7 @@ const routes = [
     ],
     {
         name: `${!isLoggedIn  ?"Login":"Logout"}`,
-        path: "/login"
+        path: `${!isLoggedIn  ?"/login":"/logout"}`
     },
 ]
   useEffect(() => {
@@ -52,11 +52,6 @@ const routes = [
                    
                   
 
-                    if (data === null && subRoute.name === "Create post") {
-               
-                        return null;
-                    }
-              else
                     return{
                 name: subRoute.name,
                 path: subRoute.path
