@@ -11,7 +11,6 @@ export default function NoteList({notes}:NoteProps) {
   const imageFunny = `https://res.cloudinary.com/doxjwirzp/image/upload/jq5xhj4rzraoqukyqahb.jpg`;
   const imagework = `https://res.cloudinary.com/doxjwirzp/image/upload/tgvong3adan9k0lkgpbw.jpg`;
   
-  
    /*const updatedNotes:ClockworkNotes = notes !== null ? []: notes.map((note:ClockworkNotes) => {
     if (note.name === "ideas") {
       return {...note ,image: imageIdea };
@@ -28,7 +27,7 @@ export default function NoteList({notes}:NoteProps) {
     
   return  (
     <div>
-   { notes.map((note:ClockworkNotes)=>(
+   { notes!.map((note:ClockworkNotes)=>(
 
 
   

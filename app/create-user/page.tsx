@@ -5,7 +5,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import CreateUserComponent from '@/components/createUserComponent';
+import FormCreateUser from '@/components/formCreateUser';
 const CreateUserPage = ({imageLink}:any) => {
     const [width, setWidth] = useState<number|any>()
         
@@ -33,7 +33,7 @@ const CreateUserPage = ({imageLink}:any) => {
         (
          <div>
          
-           <CreateUserComponent  imageLink={"/24/4/9/3/designer-9.png"} />
+           <FormCreateUser  imageLink={"/24/4/9/3/designer-9.png"} />
          
          </div>
        ) 
@@ -45,7 +45,7 @@ const CreateUserPage = ({imageLink}:any) => {
        width > 800 && (
        <div>
       
-         <CreateUserComponent  imageLink={"/24/4/9/2/designer-8.png"} />
+         <FormCreateUser  imageLink={"/24/4/9/2/designer-8.png"} />
  
       
        </div>)}
@@ -55,32 +55,3 @@ const CreateUserPage = ({imageLink}:any) => {
 };
 
 export default CreateUserPage;
-/*
-
-import CheckViewport from "@/components/checkViewPort"
-import LoginComponent from "@/components/loginComponent"
-import Image from "next/image"
-import { useEffect, useState } from "react"
-import Home from "../page"
-
-
-const imageLoader = ({ src}:any) => {
-    return `https://app.crystallize.com/@alexanderaspmannu/en/assets/photo/alexanderaspmannu/24/3/14/1/${src}`
-  }
-   
-const Login = ( imageLink: any) => {
-
-   
-    return(
-        <main>
-            
-    {<CheckViewport/>}   
-    
-        
-        </main>
-    )
-}
-
-
-export default Login
-*/  

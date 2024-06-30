@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import Image from "next/image"
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import H1 from './h1';
 
 interface User {
     password:string
@@ -22,16 +23,18 @@ interface User {
     return `https://app.crystallize.com/@alexanderaspmannu/en/assets/photo/alexanderaspmannu${src}`
   }
   
-function LoginComponent ({imageLink}:any )  {
+function FormLoggin ({imageLink}:any )  {
  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubMitting, setIsSubMitting] = useState(false);
+  const [errors,setErrors] = useState<string[]>([]);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const response = await fetch('/api/login', {
+    const response = await fetch("api/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -48,8 +51,8 @@ function LoginComponent ({imageLink}:any )  {
     return(
       
     
-<main>
-      <div className="min-h-screen min-w-screen flex justify-center">
+<main className='flex flex-col items-center '>
+<div className="min-h-screen min-w-screen flex justify-center">
       <Image
       src={`https://media.crystallize.com/alexanderaspmannu${imageLink}`}
       alt="Picture of the author"
@@ -58,23 +61,27 @@ function LoginComponent ({imageLink}:any )  {
       className="min-h-screen min-w-screen "
       style={{position:'absolute'}}
       />       
-         
+               <div className={"absolute items-center top-24   "}>   <H1 >Login</H1></div>
+
    
         <div className={styles.login}>
      
-           <h1 className={styles.login__title}>Login</h1>
            <form onSubmit={handleSubmit}  className={styles.login__form}>
 
            <div className={styles.login__inputs}>
               <div className={styles.login__box}>
-                 <input placeholder="Email ID" required className={styles.login__input} type="text"
+              <label>email</label>
+
+                 <input placeholder="type it here" required className={styles.login__input} type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}  />
                  <i className="ri-mail-fill"></i>
               </div>
 
               <div className={styles.login__box}>
-                 <input type="password" placeholder="Password" required className={styles.login__input}   
+              <label>password</label>
+
+                 <input type="password" placeholder="type it here" required className={styles.login__input}   
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
                  <i className={styles.ri_lock_2_fill}></i>
@@ -89,8 +96,10 @@ function LoginComponent ({imageLink}:any )  {
 
               <p className={styles.login__forgot}>{`Forgot Password?`}</p>
            </div>
+           <div className="flex flex-col items-center">
+           <button className={ `${styles.login__button} bg-blue-300 opacity[30%] disabled:bg-gray-500 py-2 rounded`} disabled={isSubMitting} type="submit" >Loggin</button>
 
-<button  className={styles.login__button} type="submit">Login</button>
+</div>
 
            <div className={styles.login__register} >
            <p>{` Dont have an account?`}<Link href={'/create-user'}> Register</Link></p>  
@@ -104,4 +113,4 @@ function LoginComponent ({imageLink}:any )  {
      </main>
     )
 }
-export default LoginComponent
+export default FormLoggin

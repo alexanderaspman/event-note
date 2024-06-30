@@ -6,6 +6,9 @@ import { cookies } from "next/headers"
 type NotesPageProps={
     params:{category:string}
 }
+type Data = {
+    data:null|[]}
+
 type Props = {
     data:any|any[]
     update:any|any[]
@@ -28,7 +31,7 @@ const NotesPage = async ({params}:NotesPageProps) =>{
        }
       
     const response = await fetch("http://localhost:3003/api/product", options)
-    const data:any|any[] = await response.json()||[]
+    const data:any|any[]|null = await response.json()||null
     
 
 const category = params.category
@@ -38,7 +41,7 @@ const category = params.category
         {category === "all" && "All notes"}
         {category !== "all" && `Notes in category ${category.charAt(0).toUpperCase()+ category.slice(1)}`}
         </H1>
-      {<NoteList notes={data.data} />
+      { data !== null &&  <NoteList notes={data.data} />
       }
         </main>)
 }

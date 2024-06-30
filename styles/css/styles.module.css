@@ -32,7 +32,7 @@ img {
 
 .login__bg {
   position: absolute;
-  width: 100%;
+  width: 110%;
   height: 100%;
   object-fit: cover;
   object-position: center;
@@ -41,12 +41,12 @@ img {
 .login__form {
   
   position: relative;
-  margin-inline: 1.5rem;
+  margin-inline: 1.9rem;
   background-color: hsla(0, 0%, 100%, 0.01);
   border: 2px solid hsla(0, 0%, 100%, 0.418);
-  padding: 2.5rem 1rem;
+  padding: 2.5rem 1.3rem;
   color: var(--white-color);
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   backdrop-filter: blur(16px);
    
 }
@@ -68,12 +68,12 @@ img {
 }
 
 .login__box {
-  grid-template-columns: 1fr max-content;
-  column-gap: .75rem;
+  grid-template-columns: 1.3fr max-content;
+  column-gap: .15rem;
   align-items: center;
   border: 2px solid hsla(0, 0%, 100%, .7);
-  padding-inline: 1.25rem;
-  border-radius: 4rem;
+  padding-inline: 1.35rem;
+  border-radius: 1.5rem;
 }
 
 .login__input, 
@@ -129,11 +129,9 @@ img {
 }
 
 .login__button {
-  width: 100%;
-  padding: 1rem;
+  width: 50%;
+  padding: 2px;
   margin-bottom: 1rem;
-  background-color: var(--white-color);
-  border-radius: 4rem;
   color: var(--black-color);
   font-weight: 500;
   cursor: pointer;

@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import LoginComponent from '@/components/loginComponent';
+import FormLoggin from '@/components/formLoggin';
 
 const LoginPage = () => {
     const [width, setWidth] = useState<number|any>()
@@ -33,7 +33,7 @@ const LoginPage = () => {
         (
          <div>
          
-           <LoginComponent  imageLink={"/24/4/9/3/designer-9.png"} />
+           <FormLoggin  imageLink={"/24/4/9/3/designer-9.png"} />
          
          </div>
        ) 
@@ -45,7 +45,7 @@ const LoginPage = () => {
        width > 800 && (
        <div>
       
-         <LoginComponent  imageLink={"/24/4/9/2/designer-8.png"} />
+         <FormLoggin  imageLink={"/24/4/9/2/designer-8.png"} />
  
       
        </div>)}

@@ -1,16 +1,17 @@
 "use client"
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Cookies from 'js-cookie';
 
-export default function CreateCategoryPost() {
+export default function CreateCategoryPost({data}:any) {
     const [productName , setProductName] = useState('')
-
+  const [token,setToken] = useState<string|undefined>(undefined)
     const router = useRouter();
   
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       if(!productName) return;
-      const response = await fetch('/api/create-category', {
+      const response = await fetch('api/product', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,7 +26,7 @@ export default function CreateCategoryPost() {
       }
     }; 
   
-
+  
    
   return (
     <form onSubmit={handleSubmit}className="w-full sm:w-[580px]">

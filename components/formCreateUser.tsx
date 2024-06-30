@@ -5,15 +5,16 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import Image from "next/image"
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import H1 from './h1';
 
-interface User {
+type HTMLFormEvent ={
     password:string
     email?: string;
     name?: string;
     title?: string;
     body?: string;
   }
-  interface Token {token:string}
+  type Token ={token:string}
   type T = {
     
    data:   Token[]|null}
@@ -22,23 +23,30 @@ interface User {
     return `https://app.crystallize.com/@alexanderaspmannu/en/assets/photo/alexanderaspmannu${src}`
   }
   
-function CreateUserComponent<getServerSideProps>  ({imageLink}:any )  {
+function FormCreateUser  ({imageLink}:any )  {
  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isSubMitting, setIsSubMitting] = useState(false);
+  const [errors,setErrors] = useState<string[]>([]);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const response = await fetch('/api/create-user', {
+    setIsSubMitting(true)
+    if (password !== confirmPassword){
+      setIsSubMitting(false)
+      return;
+    }
+    const response = await fetch("api/create-user", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email:username, password }),
     });
-
+    setIsSubMitting(false)
     if (response.ok) {
       router.push('/dashboard');
     } else {
@@ -48,7 +56,7 @@ function CreateUserComponent<getServerSideProps>  ({imageLink}:any )  {
     return(
       
     
-<main>
+<main className='flex flex-col items-center '>
       <div className="min-h-screen min-w-screen flex justify-center">
       <Image
       src={`https://media.crystallize.com/alexanderaspmannu${imageLink}`}
@@ -58,42 +66,60 @@ function CreateUserComponent<getServerSideProps>  ({imageLink}:any )  {
       className="min-h-screen min-w-screen "
       style={{position:'absolute'}}
       />       
-      
+              <div className={"absolute top-24   text-right  "}>   <H1 >Create a account</H1></div>
+
    
         <div className={styles.login}>
-     
-           <h1 className={styles.login__title}>Create a account</h1>
-           <form onSubmit={handleSubmit}  className={styles.login__form}>
 
+          
+           <form  onSubmit={handleSubmit}  className={styles.login__form}>
+            <div>
+{
+  errors.length > 0 && (<ul>{errors.map((error)=>(<li key={error} className="bg-red-100 text-red-500 px-4 py-2 rounded">{error}</li>))}</ul>)
+}</div>
            <div className={styles.login__inputs}>
               <div className={styles.login__box}>
-                 <input placeholder="Email ID" required className={styles.login__input} type="text"
+                <label className={styles.label}>Email:</label>
+                 <input placeholder="Type here..." required className={styles.login__input} type="text"
               value={username}
+              
+              maxLength={50}
               onChange={(e) => setUsername(e.target.value)}  />
                  <i className="ri-mail-fill"></i>
               </div>
 
               <div className={styles.login__box}>
-                 <input type="password" placeholder="Password" required className={styles.login__input}   
+              <label className={styles.label}>Password:</label>
+
+                 <input type="password" placeholder="Type here..." required className={styles.login__input}   
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
+                 <i className={styles.ri_lock_2_fill}></i>
+              </div>
+              <div className={styles.login__box}>
+              <label className={styles.label}>Password:</label>
+
+                 <input type="password" placeholder="Confirme password..." required className={styles.login__input}   
+              value={confirmPassword}
+              minLength={8}
+              onChange={(e) => setConfirmPassword(e.target.value)} />
                  <i className={styles.ri_lock_2_fill}></i>
               </div>
            </div>
 
            <div className={styles.login__check}>
               <div className={styles.login__check_box}>
-                 <input type="checkbox" className={styles.login__check_input} id="user-check"/>
+                 <input type="checkbox" className={styles.login__check_input} id="user-check"               minLength={8}
+                 />
                  <label  className={styles.login__check_label}>Remember me</label>
               </div>
 
              
            </div>
+           <div className="flex flex-col items-center">
+<button className={ `${styles.login__button} bg-blue-300 disabled:bg-gray-500 py-2 rounded`}  type="submit" >Create user</button>
+</div>
 
-<Link href={`${''}`}>
-<button className={styles.login__button} type="submit">Create user</button>
-
-           </Link>
            <div className={styles.login__register} >
            <p>{` Already have an acount?`} <Link href={'/login'}>Signin</Link></p>  
            </div>
@@ -106,4 +132,4 @@ function CreateUserComponent<getServerSideProps>  ({imageLink}:any )  {
      </main>
     )
 }
-export default CreateUserComponent
+export default FormCreateUser

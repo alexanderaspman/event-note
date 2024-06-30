@@ -33,8 +33,8 @@ const routes = [
         { name: "Create post", path: "/create-post" },
     ],
     {
-        name: `${!isLoggedIn  ?"Login":"Logout"}`,
-        path: `${!isLoggedIn  ?"/login":"/logout"}`
+        name: `${isLoggedIn  ?"Login":"Logout"}`,
+        path: `${isLoggedIn  ?"/login":"/logout"}`
     },
 ]
   useEffect(() => {
