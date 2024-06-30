@@ -73,7 +73,7 @@ img {
   align-items: center;
   border: 2px solid hsla(0, 0%, 100%, .7);
   padding-inline: 1.25rem;
-  border-radius: 4rem;
+  border-radius: 1.5rem;
 }
 
 .login__input, 
@@ -129,11 +129,10 @@ img {
 }
 
 .login__button {
-  width: 100%;
-  padding: 1rem;
+  width: 40%;
+  padding: 0.2rem;
   margin-bottom: 1rem;
-  background-color: var(--white-color);
-  border-radius: 4rem;
+  border-radius: 0.6rem;
   color: var(--black-color);
   font-weight: 500;
   cursor: pointer;

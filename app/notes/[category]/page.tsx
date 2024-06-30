@@ -28,7 +28,7 @@ const NotesPage = async ({params}:NotesPageProps) =>{
        }
       
     const response = await fetch("http://localhost:3003/api/product", options)
-    const data:any|any[] = await response.json()||[]
+    const data:any|any[]|null = await response.json()
     
 
 const category = params.category
@@ -38,8 +38,9 @@ const category = params.category
         {category === "all" && "All notes"}
         {category !== "all" && `Notes in category ${category.charAt(0).toUpperCase()+ category.slice(1)}`}
         </H1>
-      {<NoteList notes={data.data} />
-      }
+      {data !== null && <NoteList notes={data.data} />}
+      
+
         </main>)
 }
 export default NotesPage

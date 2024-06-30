@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import Image from "next/image"
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import H1 from './h1';
 
 interface User {
     password:string
@@ -22,7 +23,7 @@ interface User {
     return `https://app.crystallize.com/@alexanderaspmannu/en/assets/photo/alexanderaspmannu${src}`
   }
   
-function LoginComponent ({imageLink}:any )  {
+function LoginComponent<getServerSideProps>  ({imageLink}:any )  {
  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -36,7 +37,7 @@ function LoginComponent ({imageLink}:any )  {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email:username, password }),
+      body: JSON.stringify({ name:username, password }),
     });
 
     if (response.ok) {
@@ -58,11 +59,10 @@ function LoginComponent ({imageLink}:any )  {
       className="min-h-screen min-w-screen "
       style={{position:'absolute'}}
       />       
-         
-   
+        
         <div className={styles.login}>
      
-           <h1 className={styles.login__title}>Login</h1>
+           <h1 className={styles.login__title}><H1>Login</H1></h1>
            <form onSubmit={handleSubmit}  className={styles.login__form}>
 
            <div className={styles.login__inputs}>
@@ -87,13 +87,13 @@ function LoginComponent ({imageLink}:any )  {
                  <label  className={styles.login__check_label}>Remember me</label>
               </div>
 
-              <p className={styles.login__forgot}>{`Forgot Password?`}</p>
+              <a href="#" className={styles.login__forgot}>Forgot Password?</a>
            </div>
-
-<button  className={styles.login__button} type="submit">Login</button>
-
+<div className='flex flex-col items-center'>
+<button  className={`${styles.login__button} bg-gray-500`} type="submit">Login</button>
+</div>
            <div className={styles.login__register} >
-           <p>{` Dont have an account?`}<Link href={'/create-user'}> Register</Link></p>  
+           <p> Dont have an account?<Link href={'/create-user'}> <a href="/create-user">Register</a></Link></p>  
            </div>
            </form>
      </div>
