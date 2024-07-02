@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  const response = await fetch(`https://localhost:3003/user`, {
+  const response = await fetch(`https://https://api-clockwork-noangst.vercel.app/user`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

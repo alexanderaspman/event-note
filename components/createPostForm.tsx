@@ -27,6 +27,8 @@ export default function CreatePostForm({data}:any) {
     const [body,setBody] = useState('')
     const [importance,setImportance] = useState('')
   const [disabled, setDisabled] = useState(true)
+  const [errors,setErrors] = useState<string[]>([]);
+
 
     const onSubmitForm = async () =>{
       const postData:FormValuesProps ={
@@ -36,6 +38,9 @@ export default function CreatePostForm({data}:any) {
       } 
     }
   return (<form onSubmit={onSubmitForm} className="flex flex-col">
+   {
+  errors.length > 0 && (<ul>{errors.map((error)=>(<li key={error} className="bg-red-100 text-red-500 px-4 py-2 rounded">{error}</li>))}</ul>)
+}
   <div className="flex flex-col ">
     <div className="flex flex-row  " >
   <div className="flex flex-row w-[100%] mr-10" >
@@ -50,7 +55,7 @@ export default function CreatePostForm({data}:any) {
             transition
             anchor="right"
             className="w-52 origin-top-right rounded-xl border border-white/5 bg-white/5 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
-          > {data.data.map((value:ClockworkNotes)=>{
+          > {data !==null && data.data.map((value:ClockworkNotes)=>{
             const categoryHandler =()=>{
                 setCategoryName(value.name)
                 setCategoryId(value.id)

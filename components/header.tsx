@@ -33,14 +33,14 @@ const routes = [
         { name: "Create post", path: "/create-post" },
     ],
     {
-        name: `${isLoggedIn  ?"Login":"Logout"}`,
-        path: `${isLoggedIn  ?"/login":"/logout"}`
+        name: `${!isLoggedIn  ?"Login":"Logout"}`,
+        path: `${!isLoggedIn  ?"/login":"/logout"}`
     },
 ]
   useEffect(() => {
     const tokenFromCookie = Cookies.get('token');
     setToken(tokenFromCookie);
-  }, []);
+  }, [token]);
   function mapRoutes(routes: any[]) {
    
     return routes.map(route => {
@@ -70,7 +70,10 @@ const mappedRoutes = mapRoutes(routes);
     const newArray = mappedRoutes.filter(item => item !== null);
 
 console.log(activePathnamn)
-    return(<header className="flex items-center justify-between botder-b border-white/10 h-14 px-3 sm:px-9 ">
+    return(<>{!isLoggedIn ?
+    
+    
+    <header className="flex items-center justify-between botder-b border-white/10 h-14 px-3 sm:px-9 ">
         <Logo/>
         <nav className="h-full">
             <ul className="flex gap-x-6 h-full text-sm">
@@ -87,6 +90,6 @@ console.log(activePathnamn)
 </li> ))}
                 </ul>
         </nav>
-    </header>)
+    </header>:''}</> )
 }
 export default Header

@@ -13,6 +13,7 @@ import {
 } from '@heroicons/react/16/solid'
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { ReactNode } from "react";
 type CreatePostProps={
   data:string|[]
 }
@@ -32,18 +33,17 @@ export default async function CreatePostPage() {
         method: 'GET',
         headers,
        }
-      
     const response = await fetch("http://localhost:3003/api/product", options)
     const data:any|any[]|null = await response.json()||null
 const text = "Dont seem like you have created a category, do this before this page is enabled"
   return (
-<main className="flex flex-col items-center pt-36 px-3 pr-36">
-  {data !== null && <CreatePostForm data={data}/>}
+<main className="flex flex-col items-center">
+<H1>{data === null ? "First choose a category":"First create a category"}</H1>
+  {data === null ? <CreatePostForm data={data}/>:  <Link href={'/create-category'}>seems like you dont have any categorys created, go to create category and create one. This page will be created after that</Link> }
 
 <div className="fixed top-24  text-right">
-<H1>{data !== null ? "First choose a category":"First Create a category"}</H1>
 
-        {data === null && <div className="mt-10 justify-items-spacebetween"> <CreateCategoryPost/> {text} </div>}
+
 </div>
 </main>
 )

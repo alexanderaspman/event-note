@@ -35,7 +35,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const token = Cookies.get('token');
       const response = await axios.get('http://localhost:3003/api/update', {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+
+
         }
       });
       setData(response.data);

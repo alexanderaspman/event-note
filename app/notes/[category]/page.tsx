@@ -41,8 +41,9 @@ const category = params.category
         {category === "all" && "All notes"}
         {category !== "all" && `Notes in category ${category.charAt(0).toUpperCase()+ category.slice(1)}`}
         </H1>
-      { data !== null &&  <NoteList notes={data.data} />
+      { data !== null ? "seams like you dont have any notes created" :  <NoteList notes={data.data} />
       }
+      
         </main>)
 }
 export default NotesPage
